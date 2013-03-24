@@ -84,8 +84,8 @@ RadixSortEnactor<Key>::RadixSortEnactor(uint num_elements)
 : _num_elements(num_elements) {
 
     const int N = _num_elements;
-    const int C = 64;
-    const int T = 256;
+    const int C = CTAs;
+    const int T = NUM_THREADS;
     const int B = (N/(T*C));
 
     _blocks  = C;

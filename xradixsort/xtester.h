@@ -12,6 +12,7 @@
 #include <vector>
 #include <algorithm>
 
+#include "xconfig.h"
 #include "xdevice.h"
 
 template <typename Key>
@@ -29,19 +30,19 @@ public:
     , sample_max(0)
     , compare(cmp)
     , currentDevice(device) {
-        const int CTAs = device.multiProcessorCount * 8;
+
         int tilesPerCTA = 0;
         if (argc == 3) {
             tilesPerCTA = atoi(argv[1]);
-            array_size = CTAs * 256 * tilesPerCTA;
+            array_size = CTAs * NUM_THREADS * tilesPerCTA;
             sample_max = atoi(argv[2]);
         } else if (argc == 2) {
             tilesPerCTA = atoi(argv[1]);
-            array_size = CTAs * 256 * tilesPerCTA;
+            array_size = CTAs * NUM_THREADS * tilesPerCTA;
             sample_max = 1024;
         } else {
             tilesPerCTA = 4;
-            array_size = CTAs * 256 * tilesPerCTA;
+            array_size = CTAs * NUM_THREADS * tilesPerCTA;
             sample_max = 1024;
         }
         sample.resize(array_size);

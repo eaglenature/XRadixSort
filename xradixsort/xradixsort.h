@@ -10,14 +10,6 @@
 
 #include "xconfig.h"
 
-#define CTAs 64
-
-#define WARP_SIZE 32
-#define NUM_THREADS 256
-#define NUM_WARPS (NUM_THREADS / WARP_SIZE)
-#define LOG_NUM_THREADS 8
-#define LOG_NUM_WARPS (LOG_NUM_THREADS - 5)
-#define SCAN_STRIDE (WARP_SIZE + WARP_SIZE / 2 + 1)
 
 template<int BITS> struct DigitMask;
 template<typename T> struct UpdateHistogram;
