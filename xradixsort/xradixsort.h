@@ -51,7 +51,7 @@ template<> struct UpdateHistogram<uint4> {
     }
 };
 
-template<int BITS, int OFFSET> struct ExtractMaskedValue<uint, BITS, OFFSET> {
+template<int BITS, int OFFSET> struct ExtractMaskedValue<uint,  BITS, OFFSET> {
     __device__
     inline static uint get(uint a) {
         return (a >> OFFSET) & DigitMask<BITS>::value;
@@ -231,8 +231,7 @@ void ScanCTA(volatile int* array, volatile uint* localSum, int CTA_SIZE)
     // Run inclusive scan on each warp's data
     int sum = x;
     #pragma unroll
-    for (int i = 0; i < 5; ++i)
-    {
+    for (int i = 0; i < 5; ++i) {
         int offset = 1 << i;
         sum += s[-offset];
         s[0] = sum;
@@ -243,8 +242,8 @@ void ScanCTA(volatile int* array, volatile uint* localSum, int CTA_SIZE)
 
     __shared__ volatile int totals[NUM_WARPS + NUM_WARPS / 2];
 
-    if (tid < NUM_WARPS)
-    {
+    if (tid < NUM_WARPS) {
+
         int total = scan_storage[SCAN_STRIDE * tid + WARP_SIZE / 2 + WARP_SIZE - 1];
 
         totals[tid] = 0;
@@ -253,8 +252,7 @@ void ScanCTA(volatile int* array, volatile uint* localSum, int CTA_SIZE)
         s2[0] = total;
 
         #pragma unroll
-        for (int i = 0; i < LOG_NUM_WARPS; ++i)
-        {
+        for (int i = 0; i < LOG_NUM_WARPS; ++i) {
             int offset = 1 << i;
             totalsSum += s2[-offset];
             s2[0] = totalsSum;
@@ -527,8 +525,7 @@ void DownsweepScanKernel(
     __shared__ uint scannedSum[RADIX_DIGITS]; // constant in whole CTA for each tile
     __shared__ uint totalsSum[RADIX_DIGITS];  // constant in whole CTA for each tile
 
-    if (tid < RADIX_DIGITS)
-    {
+    if (tid < RADIX_DIGITS) {
         countTotals[tid] = 0;                                // zero before traverse tiles
         scannedSum[tid]  = spine[blockIdx.x + CTAs * tid]; // load offsets
         totalsSum[tid]   = spine[CTAs * RADIX_DIGITS + tid];      // load scan of total sums
