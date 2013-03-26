@@ -16,7 +16,8 @@
 #include "xdevice.h"
 
 template <typename Key>
-class RadixSortTester {
+class RadixSortTester
+{
 public:
 
     std::vector<Key> sample;

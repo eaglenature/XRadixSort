@@ -10,7 +10,8 @@
 
 #include "xerror.h"
 
-class CudaDevice {
+class CudaDevice
+{
 public:
 
     float peakBandwidth;

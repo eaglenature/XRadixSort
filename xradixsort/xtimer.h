@@ -10,7 +10,8 @@
 
 #include "xerror.h"
 
-class CudaDeviceTimer {
+class CudaDeviceTimer
+{
 public:
 
     CudaDeviceTimer() {
