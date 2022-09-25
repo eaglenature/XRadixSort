@@ -1,4 +1,7 @@
 # Binary files
+*.exe
+*.exp
+*.lib
 *.cubin
 *.out
 *.so
@@ -8,6 +11,7 @@
 # Directories
 Debug/
 Release/
+Build/
 
 #Project files
 .cproject

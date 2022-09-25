@@ -10,6 +10,9 @@
 
 #include "xconfig.h"
 
+#define FULL_MASK 0xffffffff
+typedef unsigned int uint;
+
 
 template<int BITS> struct DigitMask;
 template<typename T> struct UpdateHistogram;
@@ -393,7 +396,7 @@ inline void BallotScanCTAILP(
     uint bits[RADIX_DIGITS];
     #pragma unroll
     for (int radix = 0; radix < RADIX_DIGITS; ++radix) {
-        bits[radix] = __ballot((radix == u) ? 1 : 0);
+        bits[radix] = __ballot_sync(FULL_MASK, (radix == u) ? 1 : 0);
     }
 
     //uint mask = bfi(0, 0xFFFFFFFF, 0, lane); // bfi doesn't compile!

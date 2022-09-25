@@ -59,8 +59,8 @@ public:
         for (size_t s(0); s < sample.size(); ++s) {
             sample[s] = static_cast<Key>(std::rand() % sample_max);
         }
-        printf("N:    %d\n", sample.size());
-        printf("SAMPLE_MAX: %d\n", array_size);
+        printf("N:    %zd\n", sample.size());
+        printf("SAMPLE_MAX: %zd\n", array_size);
     }
 
     void ShowStats(float elapsedTimeMs) {
@@ -81,7 +81,7 @@ public:
             break;
         }
         if (incorrect) {
-            printf("Incorrect at %d:  Ref: %d vs. Dev: %d\n", s, sample[s], result[s]);
+            printf("Incorrect at %zu:  Ref: %u vs. Dev: %u\n", s, sample[s], result[s]);
         } else {
             printf("Perfectly correct!\n");
         }
